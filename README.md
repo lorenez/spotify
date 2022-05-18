@@ -3,8 +3,8 @@ The project uses dbt to help translate, model, and analyze Spotify playlist data
 
 ## Requirements and Tech Stack
 To run this project locally you will need to install and have access to the following:
-[dbt](https://docs.getdbt.com/dbt-cli/install/overview) (dbt-bigquery)
-[Google BigQuery](https://cloud.google.com/bigquery)
+- [dbt](https://docs.getdbt.com/dbt-cli/install/overview) (dbt-bigquery)
+- [Google BigQuery](https://cloud.google.com/bigquery)
 
 ## Installation
 1. Clone the Github repo locally
