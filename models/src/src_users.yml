@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: src_users
+    description: "The unique users of Spotify"
+    columns:
+      - name: id
+        description: "{{ doc('owner_id') }}"
+        tests:
+        - not_null
+        # TODO: Found lengths of 7, 11 and 32. This should be verified that these lengths are all acceptable for an owner id
+        - dbt_expectations.expect_column_value_lengths_to_be_between:
+            min_value: 7
+            max_value: 32
+
+      - name: user_country
+        description: "{{ doc('owner_country') }}"
+        tests:
+        # TODO: It would be better if we had a list of countries Spotify is available in for accepted values
+        - not_null
+        - accepted_values:
+            values:
+              - US

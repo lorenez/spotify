@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: src_genres
+    description: "The unique genres of music"
+    columns:
+
+      - name: genre
+        description: "The name of the genre"
+        tests:
+        - accepted_values:
+            values:
+              - 'No Genre'
+              - Alternative
+              - Blues
+              - Childrens # TODO: We should find out a better way to name this because dropping the apostrophe is incorrect, however this gets the test running
+              - Classical
+              - Country & Folk
+              - Dance & House
+              - Easy Listening
+              - Electronica
+              - Holiday
+              - Indie Rock
+              - Jazz
+              - Latin
+              - Metal
+              - New Age
+              - Other
+              - Pop
+              - Punk
+              - R&B
+              - Rap
+              - Reggae
+              - Religious
+              - Rock
+              - Soundtrack
+              - Spoken & Audio
+              - Traditional

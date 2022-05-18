@@ -1,0 +1,344 @@
+version: 2
+
+models:
+  - name: src_playlists
+    description: "The source table of playlists"
+    columns:
+      - name: playlist_uri
+        description: "{{ doc('playlist_uri') }}"
+        tests:
+        - not_null
+        - unique
+        # TODO: There are not many with a 52 length, we should verify that this is correct
+        - dbt_expectations.expect_column_value_lengths_to_be_between:
+            min_value: 52
+            max_value: 77
+
+      - name: owner_id
+        description: "{{ doc('owner_id') }}"
+        tests:
+        - not_null
+        # TODO: Found lengths of 7, 11 and 32. This should be verified that these lengths are all acceptable for an owner id
+        - dbt_expectations.expect_column_value_lengths_to_be_between:
+            min_value: 7
+            max_value: 32
+
+      - name: num_streams
+        description: "{{ doc('num_streams') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_streams_30s
+        description: "{{ doc('num_streams_30s') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: daily_active_users
+        description: "{{ doc('daily_active_users') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: weekly_active_users
+        description: "{{ doc('weekly_active_users') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: monthly_active_users
+        description: "{{ doc('monthly_active_users') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: mau_previous_month
+        description: "{{ doc('mau_previous_month') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: mau_both_months
+        description: "{{ doc('mau_both_months') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_users
+        description: "{{ doc('num_users') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_skippers
+        description: "{{ doc('num_skippers') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: owner_country
+        description: "{{ doc('owner_country') }}"
+        tests:
+        # TODO: It would be better if we had a list of countries Spotify is available in for accepted values
+        - not_null
+        - accepted_values:
+            values:
+              - US
+
+      - name: num_tracks
+        description: "{{ doc('num_tracks') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_local_tracks
+        description: "{{ doc('num_local_tracks') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_artists
+        description: "{{ doc('num_artists') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: num_albums
+        description: "{{ doc('num_albums') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: monthly_stream30s
+        description: "{{ doc('monthly_stream30s') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: monthly_owner_stream30s
+        description: "{{ doc('monthly_owner_stream30s') }}"
+        tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_between:
+            min_value: 0 # ensure it never is negative
+
+      - name: tokens
+        description: "{{ doc('tokens') }}"
+        tests:
+        - not_null
+
+      - name: genre_1
+        description: "{{ doc('genre_1') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Genre'
+              - Alternative
+              - Blues
+              - Childrens # TODO: We should find out a better way to name this because dropping the apostrophe is incorrect, however this gets the test running
+              - Classical
+              - Country & Folk
+              - Dance & House
+              - Easy Listening
+              - Electronica
+              - Holiday
+              - Indie Rock
+              - Jazz
+              - Latin
+              - Metal
+              - New Age
+              - Other
+              - Pop
+              - Punk
+              - R&B
+              - Rap
+              - Reggae
+              - Religious
+              - Rock
+              - Soundtrack
+              - Spoken & Audio
+              - Traditional
+
+      - name: genre_2
+        description: "{{ doc('genre_2') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Genre'
+              - Alternative
+              - Blues
+              - Childrens # TODO: We should find out a better way to name this because dropping the apostrophe is incorrect, however this gets the test running
+              - Classical
+              - Country & Folk
+              - Dance & House
+              - Easy Listening
+              - Electronica
+              - Holiday
+              - Indie Rock
+              - Jazz
+              - Latin
+              - Metal
+              - New Age
+              - Other
+              - Pop
+              - Punk
+              - R&B
+              - Rap
+              - Reggae
+              - Religious
+              - Rock
+              - Soundtrack
+              - Spoken & Audio
+              - Traditional
+
+      - name: genre_3
+        description: "{{ doc('genre_3') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Genre'
+              - Alternative
+              - Blues
+              - Childrens # TODO: We should find out a better way to name this because dropping the apostrophe is incorrect, however this gets the test running
+              - Classical
+              - Country & Folk
+              - Dance & House
+              - Easy Listening
+              - Electronica
+              - Holiday
+              - Indie Rock
+              - Jazz
+              - Latin
+              - Metal
+              - New Age
+              - Other
+              - Pop
+              - Punk
+              - R&B
+              - Rap
+              - Reggae
+              - Religious
+              - Rock
+              - Soundtrack
+              - Spoken & Audio
+              - Traditional
+
+      - name: mood_1
+        description: "{{ doc('mood_1') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Mood'
+              - Aggressive
+              - Brooding
+              - Cool
+              - Defiant
+              - Easygoing
+              - Empowering
+              - Energizing
+              - Excited
+              - Fiery
+              - Gritty
+              - Lively
+              - Melancholy
+              - Other
+              - Peaceful
+              - Romantic
+              - Rowdy
+              - Sensual
+              - Sentimental
+              - Serious
+              - Somber
+              - Sophisticated
+              - Stirring
+              - Tender
+              - Upbeat
+              - Urgent
+              - Yearning
+
+      - name: mood_2
+        description: "{{ doc('mood_2') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Mood'
+              - Aggressive
+              - Brooding
+              - Cool
+              - Defiant
+              - Easygoing
+              - Empowering
+              - Energizing
+              - Excited
+              - Fiery
+              - Gritty
+              - Lively
+              - Melancholy
+              - Other
+              - Peaceful
+              - Romantic
+              - Rowdy
+              - Sensual
+              - Sentimental
+              - Serious
+              - Somber
+              - Sophisticated
+              - Stirring
+              - Tender
+              - Upbeat
+              - Urgent
+              - Yearning
+
+      - name: mood_3
+        description: "{{ doc('mood_3') }}"
+        tests:
+        - not_null
+        - accepted_values:
+            values:
+              - 'No Mood'
+              - Aggressive
+              - Brooding
+              - Cool
+              - Defiant
+              - Easygoing
+              - Empowering
+              - Energizing
+              - Excited
+              - Fiery
+              - Gritty
+              - Lively
+              - Melancholy
+              - Other
+              - Peaceful
+              - Romantic
+              - Rowdy
+              - Sensual
+              - Sentimental
+              - Serious
+              - Somber
+              - Sophisticated
+              - Stirring
+              - Tender
+              - Upbeat
+              - Urgent
+              - Yearning

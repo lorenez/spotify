@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: src_moods
+    description: "The unique moods of music"
+    columns:
+
+      - name: mood
+        description: "The name of the mood"
+        tests:
+        - accepted_values:
+            values:
+              - 'No Mood'
+              - Aggressive
+              - Brooding
+              - Cool
+              - Defiant
+              - Easygoing
+              - Empowering
+              - Energizing
+              - Excited
+              - Fiery
+              - Gritty
+              - Lively
+              - Melancholy
+              - Other
+              - Peaceful
+              - Romantic
+              - Rowdy
+              - Sensual
+              - Sentimental
+              - Serious
+              - Somber
+              - Sophisticated
+              - Stirring
+              - Tender
+              - Upbeat
+              - Urgent
+              - Yearning
